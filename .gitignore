@@ -1,3 +1,4 @@
 mkosi.cache/*
 image
 .mkosi-*
+.#image.lck
