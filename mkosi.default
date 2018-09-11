@@ -1,0 +1,9 @@
+[Distribution]
+Distribution=arch
+
+[Output]
+Format=directory
+
+[Packages]
+Packages=vim sudo base-devel git yajl
+WithNetwork=true
