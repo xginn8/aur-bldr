@@ -3,5 +3,4 @@
 useradd --create-home bldr
 passwd --delete bldr
 
-sudo su - bldr -c "git clone https://aur.archlinux.org/package-query.git /tmp/package-query ; cd /tmp/package-query ; makepkg -sri --noconfirm"
-sudo su - bldr -c "git clone https://aur.archlinux.org/yaourt.git /tmp/yaourt ; cd /tmp/yaourt ; makepkg -sri --noconfirm"
+sudo su - bldr -c "git clone https://aur.archlinux.org/yay.git /tmp/yay ; cd /tmp/yay ; makepkg -sri --noconfirm"

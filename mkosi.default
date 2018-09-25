@@ -5,5 +5,5 @@ Distribution=arch
 Format=directory
 
 [Packages]
-Packages=vim sudo base-devel git yajl
+Packages=vim sudo base-devel git yajl asp
 WithNetwork=true
