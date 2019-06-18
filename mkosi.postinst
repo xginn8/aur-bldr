@@ -4,3 +4,5 @@ useradd --create-home bldr
 passwd --delete bldr
 
 sudo su - bldr -c "git clone https://aur.archlinux.org/yay.git /tmp/yay ; cd /tmp/yay ; makepkg -sri --noconfirm"
+systemctl enable --now systemd-networkd systemd-resolved
+ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
