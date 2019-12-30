@@ -4,7 +4,7 @@ language: minimal
 before_install:
 - docker pull gin078/aur-bldr
 - env | grep "AUR" > .env
-- docker run -it gin078/aur-bldr pacman -Syyu --noconfirm --noprogress && pacman -Syu --noconfirm --noprogress
+- docker run -it gin078/aur-bldr sudo pacman -Syyu --noconfirm --noprogress && sudo pacman -Syu --noconfirm --noprogress
 
 script:
 - docker run -it --env-file .env gin078/aur-bldr

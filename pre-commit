@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+
+pkgs=$(AUR_MAINTAINER=gin078 python aur-search.py)
+cat travis.base.yml > .travis.yml
+echo "${pkgs}" >> .travis.yml
+
+git add .travis.yml
