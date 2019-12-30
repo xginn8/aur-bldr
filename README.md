@@ -14,3 +14,6 @@ mkosi/Docker config for building clean Arch Linux containers for packaging
 
 # To rebuild:
 `# mkosi --force`
+
+# To regenerate travis:
+`$ AUR_MAINTAINER=gin078 python aur-search.py > .travis.yml`
