@@ -1,4 +1,13 @@
+services:
+  - docker
 language: minimal
+before_install:
+- docker pull gin078/aur-bldr
+- env | grep "AUR" > .env
+
+script:
+- docker run -it --env-file .env gin078/aur-bldr
+
 env:
 - AUR_PACKAGE=newsbeuter-git
 - AUR_PACKAGE=python2-bitcoinrpc-git
