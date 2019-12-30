@@ -34,6 +34,7 @@ updpkg () {
     )
 }
 
+sudo su -c 'reflector -n10 > /etc/pacman.d/mirrorlist'
 BUILD_DIR=/home/bldr/builds
 
 mkdir -p "${BUILD_DIR}"
