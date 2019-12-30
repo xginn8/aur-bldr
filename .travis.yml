@@ -24,7 +24,6 @@ env:
 - AUR_PACKAGE=wxtoimg
 - AUR_PACKAGE=aisdeco2
 - AUR_PACKAGE=bitbake
-- AUR_PACKAGE=bitbake-vim
 - AUR_PACKAGE=zsh-pure-prompt-git
 - AUR_PACKAGE=snap-telemetry
 - AUR_PACKAGE=snap-telemetry-git
@@ -36,7 +35,6 @@ env:
 - AUR_PACKAGE=etcher-cli-bin
 - AUR_PACKAGE=python2-docker-py-git
 - AUR_PACKAGE=python-balena
-- AUR_PACKAGE=python2-balena
 - AUR_PACKAGE=balena-etcher
 - AUR_PACKAGE=electron3-bin
 - AUR_PACKAGE=ci-node-modules

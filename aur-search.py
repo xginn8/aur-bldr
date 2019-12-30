@@ -4,4 +4,5 @@ import os
 import aur
 
 for i in aur.msearch(os.getenv('AUR_MAINTAINER')):
-    print("- AUR_PACKAGE={}".format(i.name))
+    if (i.name == i.package_base):
+        print("- AUR_PACKAGE={}".format(i.name))
