@@ -8,10 +8,11 @@ updpkg () {
     echo "getting latest version from github"
     local URL
     local VERSION
-    URL=$(awk -F= '/url=/ {print $2}' PKGBUILD | sort | tail -n1 | sed -e 's@https://github.com@https://api.github.com/repos@' -e "s/[\'\"]//g" -e 's@$@/releases/latest@')
+    URL=$(awk -F= '/url=.*github.com.*/{print $2}' PKGBUILD | sed -e 's@https://github.com@https://api.github.com/repos@' -e "s/[\'\"]//g" -e 's@$@/releases/latest@')
+    echo "URL: ${URL}"
     VERSION=$(curl -XGET -H "Accept: application/vnd.github.v3+json" "${URL}" | jq -r '.tag_name | sub("^v";"")')
     if [ $? -ne 0 ]; then
-        URL=$(awk -F= '/url=/ {print $2}' PKGBUILD | sort | tail -n1 | sed -e 's@https://github.com@https://api.github.com/repos@' -e "s/[\'\"]//g" -e 's@$@/tags@')
+        URL=$(awk -F= '/url=.*github.com.*/{print $2}' PKGBUILD | sed -e 's@https://github.com@https://api.github.com/repos@' -e "s/[\'\"]//g" -e 's@$@/tags@')
         VERSION=$(curl -XGET -H "Accept: application/vnd.github.v3+json" "${URL}" | jq -r '.[0].name | sub("^v";"")')
 
     fi
@@ -28,14 +29,12 @@ updpkg () {
     then
             sed -i "s/^pkgrel=[0-9\.]*$/pkgrel=1/g" PKGBUILD
             sed -i "s/^pkgver=[0-9\.]*$/pkgver=${VERSION}/g" PKGBUILD
-            git config user.email "${AUR_MAINTAINER_EMAIL}"
-            git config user.name "${AUR_MAINTAINER_NAME}"
-            git config user.username "${AUR_MAINTAINER_USERNAME}"
+            exit
             updpkgsums && mksrcinfo && makepkg -sriC --noconfirm --noprogressbar && \
                 git add . && git commit -sm "update version to v${VERSION}"
             echo "New version available (${VERSION})!" && exit 1
     fi
-    makepkg -sri --noconfirm --noprogressbar && namcap ./*tar.xz && namcap PKGBUILD
+    (makepkg -sri --noconfirm --noprogressbar && namcap ./*tar.xz && namcap PKGBUILD) || yay --noconfirm --noprogressbar "${AUR_PACKAGE}" && cd "~/.cache/yay/${AUR_PACKAGE}" && namcap ./*tar.xz && namcap PKGBUILD
 }
 
 sudo su -c 'reflector -n10 > /etc/pacman.d/mirrorlist'
@@ -55,4 +54,7 @@ else
     git clone "https://aur.archlinux.org/${AUR_PACKAGE}.git" "${BUILD_DIR}/${AUR_PACKAGE}"
 fi
 cd "${AUR_PACKAGE}" || exit 1
+git config user.email "${AUR_MAINTAINER_EMAIL}"
+git config user.name "${AUR_MAINTAINER_NAME}"
+git config user.username "${AUR_MAINTAINER_USERNAME}"
 updpkg
