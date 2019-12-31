@@ -7,4 +7,4 @@ RUN chmod +x /home/root/postinstall.sh && /home/root/postinstall.sh
 COPY build.sh /home/bldr/build.sh
 
 USER bldr
-CMD ["/bin/bash","-x", "/home/bldr/build.sh"]
+CMD ["/bin/zsh","-x", "/home/bldr/build.sh"]
