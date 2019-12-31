@@ -3,36 +3,4 @@
 useradd --create-home bldr --shell /bin/zsh
 passwd --delete bldr
 
-sudo su - bldr -c "git clone https://aur.archlinux.org/yay.git /tmp/yay ; cd /tmp/yay ; makepkg -sri --noconfirm"
-systemctl enable --now systemd-networkd systemd-resolved reflector
-ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
-cat << EOF >> /home/bldr/.zshrc
-mksrcinfo () {
-        makepkg --printsrcinfo > .SRCINFO
-}
-
-updpkg () {
-        if [ -z \${VERSION+x} ]
-        then
-                echo "getting latest version from github"
-                local URL=\$(awk -F= '/^_github_url=/ {print \$2}' PKGBUILD | sed -e 's@https://github.com@https://api.github.com/repos@' -e "s/[\'\"]//g" -e 's@$@/releases/latest@')
-                local VERSION=\$(curl -XGET -H "Accept: application/vnd.github.v3+json" "\${URL}" | jq -r '.tag_name | sub("^v";"")')
-        fi
-        local OLD_VERSION=\$(awk -F= '/^pkgver=[0-9\.]*$/{print \$2}' PKGBUILD)
-        autoload is-at-least
-        local OLD_PKGREL=\$(awk -F= '/^pkgrel=[0-9\.]*$/{print \$2}' PKGBUILD)
-        if is-at-least "\${VERSION}" "\${OLD_VERSION}"
-        then
-                local NEW_PKGREL=\$(( OLD_PKGREL + 1 ))
-                echo "updating pkgrel to \${NEW_PKGREL} from \${OLD_PKGREL}"
-                sed -i "s/^pkgrel=[0-9\.]*$/pkgrel=\${NEW_PKGREL}/g" PKGBUILD
-        else
-                echo "updating pkgrel to 1"
-                sed -i "s/^pkgrel=[0-9\.]*$/pkgrel=1/g" PKGBUILD
-        fi
-        sed -i "s/^pkgver=[0-9\.]*$/pkgver=\${VERSION}/g" PKGBUILD && updpkgsums && mksrcinfo && makepkg -srC && git add . && git commit -sm "update version to v\${VERSION}" || (
-                echo "reverting pkgrel to \${OLD_PKGREL}" && sed -i "s/^pkgrel=[0-9\.]*$/pkgrel=\${OLD_PKGREL}/g" PKGBUILD
-        )
-}
-EOF
-chown bldr:bldr /home/bldr/.zshrc
+sudo su - bldr -c "git clone https://aur.archlinux.org/yay-bin.git /tmp/yay ; cd /tmp/yay ; makepkg -sri --noconfirm"
