@@ -10,6 +10,10 @@ script:
 - docker run -it --env-file .env gin078/aur-bldr
 
 env:
+- AUR_PACKAGE=balena-cli
+- AUR_PACKAGE=balena-engine
+- AUR_PACKAGE=versionist
+- AUR_PACKAGE=geeknote-improved-git
 - AUR_PACKAGE=python2-bitcoinrpc-git
 - AUR_PACKAGE=python-matplotlib-venn
 - AUR_PACKAGE=python2-pysha3

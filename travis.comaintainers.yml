@@ -1,0 +1,4 @@
+- AUR_PACKAGE=balena-cli
+- AUR_PACKAGE=balena-engine
+- AUR_PACKAGE=versionist
+- AUR_PACKAGE=geeknote-improved-git
