@@ -22,5 +22,4 @@ mkosi/Docker config for building clean Arch Linux containers for packaging
 
 1. This does not work with packages that the `AUR_MAINTAINER` is a comaintainer.
 1. Create build container to use as a base (weekly cron job via Travis?)
-1. On a new merge to upstream, rebuild the package from the new release
-1. Some packages (`xv`) use FTP to get source code, which isn't well-supported by Travis.
+1. Some packages (`xv`, `bitbake`) use FTP to get source code, which isn't well-supported by Travis.

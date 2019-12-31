@@ -14,7 +14,6 @@ env:
 - AUR_PACKAGE=python-matplotlib-venn
 - AUR_PACKAGE=python2-pysha3
 - AUR_PACKAGE=python2-markdown2-git
-- AUR_PACKAGE=python2-pyethash
 - AUR_PACKAGE=python35
 - AUR_PACKAGE=grafana-git
 - AUR_PACKAGE=mypy-git
