@@ -25,8 +25,6 @@ env:
 - AUR_PACKAGE=bitbake
 - AUR_PACKAGE=zsh-pure-prompt-git
 - AUR_PACKAGE=snap-telemetry
-- AUR_PACKAGE=snap-telemetry-git
-- AUR_PACKAGE=xv
 - AUR_PACKAGE=ptpd-git
 - AUR_PACKAGE=python-influxdb-git
 - AUR_PACKAGE=chronograf-bin
@@ -35,7 +33,6 @@ env:
 - AUR_PACKAGE=python2-docker-py-git
 - AUR_PACKAGE=python-balena
 - AUR_PACKAGE=balena-etcher
-- AUR_PACKAGE=electron3-bin
 - AUR_PACKAGE=ci-node-modules
 - AUR_PACKAGE=balena-deploy-request
 - AUR_PACKAGE=ply-git
