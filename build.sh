@@ -33,26 +33,17 @@ updpkg () {
                 git add . && git commit -sm "update version to v${VERSION}"
             echo "New version available (${VERSION})!" && exit 1
     fi
-    makepkg -sri --noconfirm --noprogressbar && namcap ./*tar.xz && namcap PKGBUILD
+    yay --noconfirm --noprogressbar -S "${AUR_PACKAGE}"
+    cd "/home/bldr/.cache/yay/${AUR_PACKAGE}"
+    namcap ./*tar.xz && namcap ./PKGBUILD
 }
 
 sudo su -c 'reflector -n10 > /etc/pacman.d/mirrorlist'
-BUILD_DIR=/home/bldr/builds
-
-mkdir -p "${BUILD_DIR}"
-cd "${BUILD_DIR}" || exit 1
 if [ -z "${AUR_PACKAGE}" ]; then
     echo "need to define \$AUR_PACKAGE, exiting"
     exit 1
 fi
 
-if [ -d "${BUILD_DIR}/${AUR_PACKAGE}" ]; then
-    cd "${AUR_PACKAGE}" || exit 1
-    git pull
-else
-    git clone "https://aur.archlinux.org/${AUR_PACKAGE}.git" "${BUILD_DIR}/${AUR_PACKAGE}"
-fi
-cd "${AUR_PACKAGE}" || exit 1
 git config user.email "${AUR_MAINTAINER_EMAIL}"
 git config user.name "${AUR_MAINTAINER_NAME}"
 git config user.username "${AUR_MAINTAINER_USERNAME}"
