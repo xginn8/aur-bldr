@@ -42,7 +42,7 @@ if [ -z "${AUR_PACKAGE}" ]; then
     exit 1
 fi
 
-sudo su -c 'reflector -n10 > /etc/pacman.d/mirrorlist'
+sudo su -c 'reflector -n10 -p http > /etc/pacman.d/mirrorlist && pacman -Syyu --noconfirm --noprogressbar'
 cd /home/bldr/
 yay -G "${AUR_PACKAGE}"
 cd ${AUR_PACKAGE}
