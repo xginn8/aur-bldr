@@ -8,11 +8,11 @@ updpkg () {
     echo "getting latest version from github"
     local URL
     local VERSION
-    URL=$(awk -F= '/url=.*github.com.*/{print $2}' PKGBUILD | sed -e 's@https://github.com@https://api.github.com/repos@' -e "s/[\'\"]//g" -e 's@$@/releases/latest@')
+    URL=$(awk -F= '/url=.*github.com.*/{print $2}' PKGBUILD | sed -e 's@https://github.com@https://api.github.com/repos@' -e "s/[\'\"]//g" -e 's@$@/releases/latest@' | head -n1)
     echo "URL: ${URL}"
     VERSION=$(curl -XGET -H "Accept: application/vnd.github.v3+json" "${URL}" | jq -r '.tag_name | sub("^v";"")')
     if [ $? -ne 0 ]; then
-        URL=$(awk -F= '/url=.*github.com.*/{print $2}' PKGBUILD | sed -e 's@https://github.com@https://api.github.com/repos@' -e "s/[\'\"]//g" -e 's@$@/tags@')
+        URL=$(awk -F= '/url=.*github.com.*/{print $2}' PKGBUILD | sed -e 's@https://github.com@https://api.github.com/repos@' -e "s/[\'\"]//g" -e 's@$@/tags@' | head -n1)
         VERSION=$(curl -XGET -H "Accept: application/vnd.github.v3+json" "${URL}" | jq -r '.[0].name | sub("^v";"")')
 
     fi
@@ -33,8 +33,7 @@ updpkg () {
                 git add . && git commit -sm "update version to v${VERSION}"
             echo "New version available (${VERSION})!" && exit 1
     fi
-    yay --noconfirm --noprogressbar -S "${AUR_PACKAGE}"
-    cd "/home/bldr/.cache/yay/${AUR_PACKAGE}"
+    yay --noconfirm --noprogressbar --builddir .. -S "${AUR_PACKAGE}" || makepkg -sriC --noconfirm --noprogressbar
     namcap ./*tar.xz && namcap ./PKGBUILD
 }
 
@@ -44,6 +43,9 @@ if [ -z "${AUR_PACKAGE}" ]; then
     exit 1
 fi
 
+cd /home/bldr/
+yay -G "${AUR_PACKAGE}"
+cd ${AUR_PACKAGE}
 git config user.email "${AUR_MAINTAINER_EMAIL}"
 git config user.name "${AUR_MAINTAINER_NAME}"
 git config user.username "${AUR_MAINTAINER_USERNAME}"
