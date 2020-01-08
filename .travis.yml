@@ -25,7 +25,6 @@ env:
 - AUR_PACKAGE=fzf-git
 - AUR_PACKAGE=wxtoimg
 - AUR_PACKAGE=aisdeco2
-- AUR_PACKAGE=bitbake
 - AUR_PACKAGE=zsh-pure-prompt-git
 - AUR_PACKAGE=snap-telemetry
 - AUR_PACKAGE=ptpd-git
