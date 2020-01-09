@@ -1,11 +1,15 @@
 #!/bin/zsh
 
+BASE_DIR=/home/bldr
 mksrcinfo () {
     makepkg --printsrcinfo > .SRCINFO
 }
 
 updpkg () {
     echo "getting latest version from github"
+    if ! grep -q "^pkgname=.*-git" PKGBUILD && ! grep -q "^_github_url=" PKGBUILD; then
+        echo "Not a -git package and no provided upstream" && exit 1
+    fi
     local URL
     local VERSION
     URL=$(awk -F= '/url=.*github.com.*/{print $2}' PKGBUILD | sed -e 's@https://github.com@https://api.github.com/repos@' -e "s/[\'\"]//g" -e 's@$@/releases/latest@' | head -n1)
@@ -43,7 +47,10 @@ if [ -z "${AUR_PACKAGE}" ]; then
 fi
 
 sudo su -c 'reflector -n10 -p http > /etc/pacman.d/mirrorlist && pacman -Syyu --noconfirm --noprogressbar'
-cd /home/bldr/
+cd "${BASE_DIR}"
 yay -G "${AUR_PACKAGE}"
 cd ${AUR_PACKAGE}
+if ! diff -q "${BASE_DIR}/pkg-gitignore" .gitignore; then
+        echo "Nonstandard gitignore" && exit 1
+fi
 updpkg
