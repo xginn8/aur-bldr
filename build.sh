@@ -7,7 +7,7 @@ mksrcinfo () {
 
 updpkg () {
     echo "getting latest version from github"
-    if ! grep -q "^pkgname=.*-git" PKGBUILD && ! grep -q "^_github_url=" PKGBUILD; then
+    if ! grep -q "^pkgname=.*-git" PKGBUILD && ! grep -q "url=\"https://github.com" PKGBUILD ; then
         echo "Not a -git package and no provided upstream" && exit 1
     fi
     local URL
