@@ -8,4 +8,9 @@ before_install:
 script:
 - docker run -it --env-file .env gin078/aur-bldr
 
-env:
+jobs:
+  allow_failures:
+    - env: AUR_PACKAGE=bitbake
+  include:
+    - stage: test
+      env:
