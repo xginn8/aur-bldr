@@ -2,15 +2,23 @@ services:
   - docker
 language: minimal
 before_install:
-- docker pull gin078/aur-bldr
 - env | grep "AUR" > .env
-
 script:
-- docker run -it --env-file .env gin078/aur-bldr
+- docker run --rm --env-file .env gin078/aur-bldr
 
 jobs:
   allow_failures:
     - env: AUR_PACKAGE=bitbake
   include:
+      #- stage: rebuild docker image
+      #  script:
+      #  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      #  - docker build -t aur-bldr .
+      #  - docker images
+      #  - docker tag gin078/aur-bldr $DOCKER_USERNAME/aur-bldr
+      #  - docker push $DOCKER_USERNAME/aur-bldr
     - stage: test
-      env:
+      allow_failures:
+        - env: AUR_PACKAGE=bitbake
+
+env:

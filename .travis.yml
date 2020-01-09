@@ -2,44 +2,53 @@ services:
   - docker
 language: minimal
 before_install:
-- docker pull gin078/aur-bldr
 - env | grep "AUR" > .env
-
 script:
-- docker run -it --env-file .env gin078/aur-bldr
+- docker run --rm --env-file .env gin078/aur-bldr
 
 jobs:
   allow_failures:
     - env: AUR_PACKAGE=bitbake
   include:
+      #- stage: rebuild docker image
+      #  script:
+      #  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      #  - docker build -t aur-bldr .
+      #  - docker images
+      #  - docker tag gin078/aur-bldr $DOCKER_USERNAME/aur-bldr
+      #  - docker push $DOCKER_USERNAME/aur-bldr
     - stage: test
-      env:
-        - AUR_PACKAGE=balena-cli
-        - AUR_PACKAGE=balena-engine
-        - AUR_PACKAGE=versionist
-        - AUR_PACKAGE=geeknote-improved-git
-        - AUR_PACKAGE=python2-bitcoinrpc-git
-        - AUR_PACKAGE=python-matplotlib-venn
-        - AUR_PACKAGE=python2-pysha3
-        - AUR_PACKAGE=python2-markdown2-git
-        - AUR_PACKAGE=python35
-        - AUR_PACKAGE=grafana-git
-        - AUR_PACKAGE=mypy-git
-        - AUR_PACKAGE=ptpd
-        - AUR_PACKAGE=chronograf
-        - AUR_PACKAGE=fzf-git
-        - AUR_PACKAGE=wxtoimg
-        - AUR_PACKAGE=aisdeco2
-        - AUR_PACKAGE=zsh-pure-prompt-git
-        - AUR_PACKAGE=snap-telemetry
-        - AUR_PACKAGE=ptpd-git
-        - AUR_PACKAGE=python-influxdb-git
-        - AUR_PACKAGE=chronograf-bin
-        - AUR_PACKAGE=proxysql
-        - AUR_PACKAGE=etcher-cli-bin
-        - AUR_PACKAGE=python2-docker-py-git
-        - AUR_PACKAGE=python-balena
-        - AUR_PACKAGE=balena-etcher
-        - AUR_PACKAGE=ci-node-modules
-        - AUR_PACKAGE=balena-deploy-request
-        - AUR_PACKAGE=ply-git
+      allow_failures:
+        - env: AUR_PACKAGE=bitbake
+
+env:
+- AUR_PACKAGE=balena-cli
+- AUR_PACKAGE=balena-engine
+- AUR_PACKAGE=versionist
+- AUR_PACKAGE=geeknote-improved-git
+- AUR_PACKAGE=python2-bitcoinrpc-git
+- AUR_PACKAGE=python-matplotlib-venn
+- AUR_PACKAGE=python2-pysha3
+- AUR_PACKAGE=python2-markdown2-git
+- AUR_PACKAGE=python35
+- AUR_PACKAGE=grafana-git
+- AUR_PACKAGE=mypy-git
+- AUR_PACKAGE=ptpd
+- AUR_PACKAGE=chronograf
+- AUR_PACKAGE=fzf-git
+- AUR_PACKAGE=wxtoimg
+- AUR_PACKAGE=aisdeco2
+- AUR_PACKAGE=bitbake
+- AUR_PACKAGE=zsh-pure-prompt-git
+- AUR_PACKAGE=snap-telemetry
+- AUR_PACKAGE=ptpd-git
+- AUR_PACKAGE=python-influxdb-git
+- AUR_PACKAGE=chronograf-bin
+- AUR_PACKAGE=proxysql
+- AUR_PACKAGE=etcher-cli-bin
+- AUR_PACKAGE=python2-docker-py-git
+- AUR_PACKAGE=python-balena
+- AUR_PACKAGE=balena-etcher
+- AUR_PACKAGE=ci-node-modules
+- AUR_PACKAGE=balena-deploy-request
+- AUR_PACKAGE=ply-git
