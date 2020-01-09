@@ -2,7 +2,7 @@
 
 pkgs=$(AUR_MAINTAINER=gin078 python aur-search.py)
 cat travis.base.yml > .travis.yml
-cat travis.comaintainers.yml >> .travis.yml
-echo "${pkgs}" >> .travis.yml
+printf "%s
+$(cat travis.comaintainers.yml)" "${pkgs}"| sort >> .travis.yml
 
 git add .travis.yml
