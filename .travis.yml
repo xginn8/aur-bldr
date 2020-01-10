@@ -18,6 +18,8 @@ jobs:
     - stage: test
       allow_failures:
         - env: AUR_PACKAGE=bitbake
+      git:
+        clone: false
 
 env:
 - AUR_PACKAGE=aisdeco2
