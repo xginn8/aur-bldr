@@ -7,8 +7,6 @@ script:
 - docker run --rm --env-file .env gin078/aur-bldr
 
 jobs:
-  allow_failures:
-    - env: AUR_PACKAGE=bitbake
   include:
       #- stage: rebuild docker image
       #  script:
