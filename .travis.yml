@@ -6,6 +6,9 @@ before_install:
 script:
 - docker run --rm --env-file .env gin078/aur-bldr
 
+allow_failures:
+- env: AUR_PACKAGE=bitbake
+
 jobs:
   include:
       #- stage: rebuild docker image
@@ -17,7 +20,7 @@ jobs:
       #  - docker push $DOCKER_USERNAME/aur-bldr
     - stage: test
       allow_failures:
-        - env: AUR_PACKAGE=bitbake
+      - env: AUR_PACKAGE=bitbake
       git:
         clone: false
 
