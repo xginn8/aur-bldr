@@ -43,7 +43,7 @@ updpkg () {
             echo "New version available (${VERSION})!" && exit 1
     fi
     yay --noconfirm --noprogressbar --builddir .. -S "${AUR_PACKAGE}" || makepkg -sriC --noconfirm --noprogressbar
-    namcap ./*tar.xz && namcap ./PKGBUILD
+    namcap ./*pkg.*tar.xz && namcap ./PKGBUILD
 }
 
 if [ -z "${AUR_PACKAGE}" ]; then

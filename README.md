@@ -38,6 +38,5 @@ $ local-setup.sh PLACE_TO_CLONE_TO
 
 1. This does not work with packages that the `AUR_MAINTAINER` is a comaintainer.
 + Workaround: use the [travis.comaintainers.yml](./travis.comaintainers.yml) stub
-1. Create build container to use as a base (monthly cron job via Travis?)
 1. Some packages (`xv`, `bitbake`) use FTP to get source code, which isn't well-supported by Travis.
 1. `bitbake` also needs git setup

@@ -6,21 +6,25 @@ before_install:
 script:
 - docker run --rm --env-file .env gin078/aur-bldr
 
-allow_failures:
-- env: AUR_PACKAGE=bitbake
+stages:
+  - name: rebuild docker image
+    if: type = cron
+  - test
 
 jobs:
+  allow_failures:
+    - env: AUR_PACKAGE=bitbake
   include:
-      #- stage: rebuild docker image
-      #  script:
-      #  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      #  - docker build -t aur-bldr .
-      #  - docker images
-      #  - docker tag gin078/aur-bldr $DOCKER_USERNAME/aur-bldr
-      #  - docker push $DOCKER_USERNAME/aur-bldr
+    - stage: rebuild docker image
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build -t aur-bldr .
+      - docker images
+      - docker tag aur-bldr $DOCKER_USERNAME/aur-bldr
+      - docker push $DOCKER_USERNAME/aur-bldr
+      env:
+          AUR_PACKAGE=
     - stage: test
-      allow_failures:
-      - env: AUR_PACKAGE=bitbake
       git:
         clone: false
 
