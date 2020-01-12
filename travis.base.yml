@@ -9,6 +9,7 @@ script:
 stages:
   - name: rebuild docker image
     if: type = cron
+    env: AUR_PACKAGE=
   - test
 
 jobs:
@@ -22,8 +23,6 @@ jobs:
       - docker images
       - docker tag aur-bldr $DOCKER_USERNAME/aur-bldr
       - docker push $DOCKER_USERNAME/aur-bldr
-      env:
-          AUR_PACKAGE=
     - stage: test
       git:
         clone: false
