@@ -41,8 +41,9 @@ updpkg () {
             updpkgsums && mksrcinfo && makepkg -sriC --noconfirm --noprogressbar && \
                 git add . && git commit -sm "update version to v${VERSION}"
             echo "New version available (${VERSION})!" && exit 1
+    else
+        yay --noconfirm --noprogressbar --builddir .. -S "${AUR_PACKAGE}" || makepkg -sriC --noconfirm --noprogressbar
     fi
-    yay --noconfirm --noprogressbar --builddir .. -S "${AUR_PACKAGE}" || makepkg -sriC --noconfirm --noprogressbar
     namcap ./*pkg.*tar.xz && namcap ./PKGBUILD
 }
 
