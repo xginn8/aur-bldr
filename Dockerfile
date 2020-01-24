@@ -4,7 +4,7 @@ RUN pacman -Syu --noconfirm && pacman -S --noconfirm sudo base-devel git pacman-
 COPY mkosi.postinst /home/root/postinstall.sh
 COPY mkosi.skeleton/ /
 RUN chmod +x /home/root/postinstall.sh && /home/root/postinstall.sh
-COPY build.sh pkg-gitignore /home/bldr/
+COPY build.sh pkg-gitignore package-versions shared.sh update_packages.sh /home/bldr/
 RUN rm -rf /var/cache/pacman/pkg/* /tmp/yay*
 
 USER bldr

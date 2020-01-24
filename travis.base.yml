@@ -2,15 +2,15 @@ services:
   - docker
 language: minimal
 before_install:
-- env | grep "AUR" > .env
+  - env | grep "AUR" > .env
 script:
-- docker run --rm --env-file .env gin078/aur-bldr
+  - docker run --rm --env-file .env gin078/aur-bldr
 
 stages:
   - name: check package versions
     if: branch = versions
   - name: rebuild docker image
-    if: type = cron
+    if: type = cron AND branch = master
   - test
     if: branch = master
 
@@ -19,8 +19,7 @@ jobs:
     - env: AUR_PACKAGE=bitbake
   include:
     - stage: recheck package versions
-      script:
-      - update_versions.sh
+      script: ./update_versions.sh
     - stage: rebuild docker image
       script:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
