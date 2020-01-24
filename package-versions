@@ -1,0 +1,31 @@
+balena-deploy-request 0.6.0
+aisdeco2 
+balena-cli 11.22.0
+balena-engine 18.9.13
+balena-etcher 1.5.71
+bitbake 1.44.1
+chronograf 1.7.17
+chronograf-bin 1.7.17
+ci-node-modules 1.1.0
+etcher-cli-bin 
+fzf-git 0.20.0
+geeknote-improved-git 2.0.20
+grafana-git 6.5.3
+mypy-git 
+ply-git 
+proxysql 1.4.16
+ptpd 
+ptpd-git 
+python2-bitcoinrpc-git 
+python2-docker-pycreds 0.4.0
+python2-docker-py-git 
+python2-markdown2-git 2.3.8
+python2-pysha3 1.0.2
+python35 
+python-balena 9.0.1
+python-influxdb-git 
+python-matplotlib-venn 0.11.5
+snap-telemetry 2.0.0
+versionist 5.4.4
+wxtoimg 
+zsh-pure-prompt-git 1.11.0

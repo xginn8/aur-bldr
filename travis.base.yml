@@ -7,15 +7,20 @@ script:
 - docker run --rm --env-file .env gin078/aur-bldr
 
 stages:
+  - name: check package versions
+    if: branch = versions
   - name: rebuild docker image
     if: type = cron
-    env: AUR_PACKAGE=
   - test
+    if: branch = master
 
 jobs:
   allow_failures:
     - env: AUR_PACKAGE=bitbake
   include:
+    - stage: recheck package versions
+      script:
+      - update_versions.sh
     - stage: rebuild docker image
       script:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
