@@ -64,5 +64,6 @@ jobs:
       - AUR_PACKAGE=snap-telemetry
       - AUR_PACKAGE=versionist
       - AUR_PACKAGE=wxtoimg
+      - AUR_PACKAGE=yq2-bin
       - AUR_PACKAGE=zsh-pure-prompt
       - AUR_PACKAGE=zsh-pure-prompt-git
