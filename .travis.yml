@@ -43,6 +43,7 @@ jobs:
       - AUR_PACKAGE=chronograf
       - AUR_PACKAGE=chronograf-bin
       - AUR_PACKAGE=ci-node-modules
+      - AUR_PACKAGE=electron7-bin
       - AUR_PACKAGE=etcher-cli-bin
       - AUR_PACKAGE=fzf-git
       - AUR_PACKAGE=geeknote-improved-git
