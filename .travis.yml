@@ -18,6 +18,7 @@ stages:
 jobs:
   allow_failures:
     - env: AUR_PACKAGE=bitbake
+    - env: AUR_PACKAGE=proxysql
   include:
     - stage: recheck package versions
       script:
