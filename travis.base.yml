@@ -12,7 +12,7 @@ stages:
     if: branch = versions
   - name: rebuild docker image
     if: type = cron
-  - test
+  - name: test
     if: branch = master
 
 jobs:
