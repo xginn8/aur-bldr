@@ -8,20 +8,15 @@ script:
 - docker run --rm --env-file .env gin078/aur-bldr
 
 stages:
-  #  - name: check package versions
-  #    if: branch = versions
   - name: rebuild docker image
     if: type = cron
-  - name: test
-    if: branch = master
+    env: AUR_PACKAGE=
+  - test
 
 jobs:
   allow_failures:
     - env: AUR_PACKAGE=bitbake AUR_PACKAGE=proxysql
   include:
-    #- stage: recheck package versions
-    #  script:
-    #  - update_versions.sh
     - stage: rebuild docker image
       script:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
