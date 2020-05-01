@@ -14,7 +14,7 @@ stages:
 
 jobs:
   allow_failures:
-    - env: AUR_PACKAGE=bitbake
+    - env: AUR_PACKAGE=bitbake AUR_PACKAGE=proxysql
   include:
     - stage: rebuild docker image
       script:
