@@ -37,9 +37,8 @@ env:
 - AUR_PACKAGE=chronograf
 - AUR_PACKAGE=chronograf-bin
 - AUR_PACKAGE=ci-node-modules
+- AUR_PACKAGE=electron7-bin
 - AUR_PACKAGE=etcher-cli-bin
-- AUR_PACKAGE=fzf-git
-- AUR_PACKAGE=geeknote-improved-git
 - AUR_PACKAGE=grafana-git
 - AUR_PACKAGE=mypy-git
 - AUR_PACKAGE=ply-git
@@ -58,4 +57,6 @@ env:
 - AUR_PACKAGE=snap-telemetry
 - AUR_PACKAGE=versionist
 - AUR_PACKAGE=wxtoimg
+- AUR_PACKAGE=yq2-bin
+- AUR_PACKAGE=zsh-pure-prompt
 - AUR_PACKAGE=zsh-pure-prompt-git
