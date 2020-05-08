@@ -1,4 +1,4 @@
-# aur-bldr
+# aur-bldr [![Build Status](https://travis-ci.org/xginn8/aur-bldr.svg?branch=master)](https://travis-ci.org/xginn8/aur-bldr)
 mkosi/Docker config for building clean Arch Linux containers for packaging
 
 # To build:
