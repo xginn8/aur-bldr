@@ -12,4 +12,8 @@ do
         echo "hook difference, installing pre-commit hook"
         cp pkg-pre-commit "${PKGBASE}/.git/hooks/pre-commit"
     fi
+    if ! diff -q pkg-gitignore "${PKGBASE}/.gitignore"; then
+        echo "gitignore difference, installing new gitignore"
+        cp pkg-gitignore "${PKGBASE}/.gitignore"
+    fi
 done < <(awk -F= '/^- AUR_PACKAGE=/{print $2}' .travis.yml)
