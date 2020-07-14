@@ -44,7 +44,7 @@ updpkg () {
     else
         yay --noconfirm --noprogressbar --builddir .. -S "${AUR_PACKAGE}" || makepkg -sriC --noconfirm --noprogressbar
     fi
-    namcap ./*pkg.*tar.xz && namcap ./PKGBUILD
+    namcap ./*pkg.*tar.* && namcap ./PKGBUILD
 }
 
 if [ -z "${AUR_PACKAGE}" ]; then
