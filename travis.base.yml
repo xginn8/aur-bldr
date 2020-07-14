@@ -8,7 +8,6 @@ script:
 
 stages:
   - name: rebuild docker image
-    if: type = cron
     env: AUR_PACKAGE=
   - test
 
