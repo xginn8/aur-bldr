@@ -1,4 +1,4 @@
-FROM archlinux:20200306
+FROM archlinux:base-devel-20210131.0.14634
 RUN sed -i -e '/IgnorePkg *=/s/^.*$/IgnorePkg = coreutils/' /etc/pacman.conf
 RUN pacman --needed --noconfirm -Syuq && yes | pacman -Sccq
 #FROM archlinux:latest
