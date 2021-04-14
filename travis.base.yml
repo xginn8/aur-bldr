@@ -13,13 +13,13 @@ stages:
 
 jobs:
   include:
-    - stage: rebuild docker image
-      script:
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -t aur-bldr .
-      - docker images
-      - docker tag aur-bldr $DOCKER_USERNAME/aur-bldr
-      - docker push $DOCKER_USERNAME/aur-bldr
+    # - stage: rebuild docker image
+    #   script:
+    #   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    #   - docker build -t aur-bldr .
+    #   - docker images
+    #   - docker tag aur-bldr $DOCKER_USERNAME/aur-bldr
+    #   - docker push $DOCKER_USERNAME/aur-bldr
     - stage: test
       git:
         clone: false

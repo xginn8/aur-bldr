@@ -13,19 +13,41 @@ stages:
 
 jobs:
   include:
-    - stage: rebuild docker image
-      script:
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -t aur-bldr .
-      - docker images
-      - docker tag aur-bldr $DOCKER_USERNAME/aur-bldr
-      - docker push $DOCKER_USERNAME/aur-bldr
+    # - stage: rebuild docker image
+    #   script:
+    #   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    #   - docker build -t aur-bldr .
+    #   - docker images
+    #   - docker tag aur-bldr $DOCKER_USERNAME/aur-bldr
+    #   - docker push $DOCKER_USERNAME/aur-bldr
     - stage: test
       git:
         clone: false
 
 env:
-
+- AUR_PACKAGE=aisdeco2
 - AUR_PACKAGE=balena-cli
+- AUR_PACKAGE=balena-cli
+- AUR_PACKAGE=balena-deploy-request
 - AUR_PACKAGE=balena-engine
+- AUR_PACKAGE=balena-engine
+- AUR_PACKAGE=balena-etcher
+- AUR_PACKAGE=chronograf
+- AUR_PACKAGE=chronograf-bin
+- AUR_PACKAGE=ci-node-modules
+- AUR_PACKAGE=grafana-git
+- AUR_PACKAGE=mypy-git
+- AUR_PACKAGE=ply-git
+- AUR_PACKAGE=ptpd
+- AUR_PACKAGE=ptpd-git
+- AUR_PACKAGE=python-aur
+- AUR_PACKAGE=python-balena
+- AUR_PACKAGE=python-influxdb-git
+- AUR_PACKAGE=python-matplotlib-venn
+- AUR_PACKAGE=snap-telemetry
 - AUR_PACKAGE=versionist
+- AUR_PACKAGE=versionist
+- AUR_PACKAGE=wxtoimg
+- AUR_PACKAGE=yq2-bin
+- AUR_PACKAGE=zsh-pure-prompt
+- AUR_PACKAGE=zsh-pure-prompt-git

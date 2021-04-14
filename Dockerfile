@@ -1,5 +1,6 @@
 FROM archlinux:base-devel-20210131.0.14634
 RUN sed -i -e '/IgnorePkg *=/s/^.*$/IgnorePkg = coreutils/' /etc/pacman.conf
+RUN curl -fsSL "https://repo.archlinuxcn.org/x86_64/glibc-linux4-2.33-4-x86_64.pkg.tar.zst" | bsdtar -C / -xvf -
 RUN pacman --needed --noconfirm -Syuq && yes | pacman -Sccq
 #FROM archlinux:latest
 #RUN pacman -Syu --noconfirm && pacman -S --noconfirm sudo base-devel git pacman-contrib reflector zsh namcap jq
